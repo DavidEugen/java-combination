@@ -20,6 +20,13 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	//excel download : poi
+	implementation 'org.apache.poi:poi:5.2.3'                // .xls 확장자
+	implementation 'org.apache.poi:poi-ooxml:5.2.3'          // .xlsx 확장자
+
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
