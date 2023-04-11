@@ -37,4 +37,4 @@ out/
 .vscode/
 
 ### Attach
-./upload-dir
+upload-dir/
