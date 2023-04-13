@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Data
 public class GameInfo {
@@ -12,7 +13,7 @@ public class GameInfo {
 
     public GameInfo(int drawing) {
         this.drawing = drawing;
-        numbers = new HashSet<>();
+        numbers = new TreeSet<>();
     }
 
     public GameInfo(int drawing, Set<Integer> numbers) {

@@ -44,13 +44,11 @@ public class EachCompareAnalyzer implements CompareAnalyzer{
     public void analyze() {
         log.debug("======\t{}\t///EachCompare///TotalCount======",compareInforms.size());
         for (AnalyzeInfo analyzeInfo : compareInforms) {
-            List<Integer> list = new ArrayList<Integer>(analyzeInfo.getIntersectionSet());
-            Collections.sort(list);
             log.debug("[Win{} vs My{}]\t\t{}\t\t{}\t\t{}\t\t\t{}"
                     ,analyzeInfo.getControlNumbersInfo().getDrawing()
                     ,analyzeInfo.getComparingNumbersInfo().getDrawing()
                     ,analyzeInfo.getMaxDuplicateCount()
-                    ,list
+                    ,analyzeInfo.getIntersectionSet()
                     ,analyzeInfo.getControlNumbersInfo().getNumbers()
                     ,analyzeInfo.getComparingNumbersInfo().getNumbers()
             );
