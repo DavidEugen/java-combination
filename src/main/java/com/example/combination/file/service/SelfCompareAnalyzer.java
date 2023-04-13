@@ -4,10 +4,12 @@ import com.example.combination.domain.AnalyzeInfo;
 import com.example.combination.domain.CompareAdapter;
 import com.example.combination.domain.GameInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 @Slf4j
+@Component
 public class SelfCompareAnalyzer implements CompareAnalyzer{
 
     private static final int MINIMUM_INTER_SECTION_COUNT = 2;

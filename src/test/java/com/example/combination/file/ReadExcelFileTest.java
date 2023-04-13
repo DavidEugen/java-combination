@@ -7,12 +7,23 @@ import com.example.combination.file.service.EachCompareAnalyzer;
 import com.example.combination.file.service.ExcelFileReader;
 import com.example.combination.file.service.SelfCompareAnalyzer;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 @SpringBootTest
+@RunWith(SpringRunner.class)
 class ReadExcelFileTest {
+
+    @Autowired
+    CompareAnalyzer selfCompareAnalyzer;
+
+    @Autowired
+    CompareAnalyzer eachCompareAnalyzer;
 
     @Test
     public void test() {
@@ -26,11 +37,11 @@ class ReadExcelFileTest {
         List<GameInfo> winList = excelFileReader.getSetList("winOnly");
         List<GameInfo> myList = excelFileReader.getSetList("MYEDIT");
 
-        CompareAnalyzer selfCompareAnalyzer = new SelfCompareAnalyzer();
+//        CompareAnalyzer selfCompareAnalyzer = new SelfCompareAnalyzer();
         selfCompareAnalyzer.compare(new CompareAdapter(myList,myList));
         selfCompareAnalyzer.analyze();
 
-        CompareAnalyzer eachCompareAnalyzer = new EachCompareAnalyzer();
+//        CompareAnalyzer eachCompareAnalyzer = new EachCompareAnalyzer();
         eachCompareAnalyzer.compare(new CompareAdapter(winList,myList));
         eachCompareAnalyzer.analyze();
 
