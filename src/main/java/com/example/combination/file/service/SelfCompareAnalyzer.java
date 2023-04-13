@@ -3,6 +3,7 @@ package com.example.combination.file.service;
 import com.example.combination.domain.AnalyzeInfo;
 import com.example.combination.domain.CompareAdapter;
 import com.example.combination.domain.GameInfo;
+import com.sun.source.tree.Tree;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +41,7 @@ public class SelfCompareAnalyzer implements CompareAnalyzer{
         AnalyzeInfo analyzeInfo = new AnalyzeInfo(controlNumbersInfo, comparingNumbersInfo);
 
         //교집합 실행
-        Set<Integer> comparedNumbers = new HashSet<>(comparingNumbersInfo.getNumbers());
+        Set<Integer> comparedNumbers = new TreeSet<>(comparingNumbersInfo.getNumbers());
         comparedNumbers.retainAll(controlNumbersInfo.getNumbers());
 
         if (comparedNumbers.size() > MINIMUM_INTER_SECTION_COUNT-1) {

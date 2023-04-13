@@ -3,13 +3,10 @@ package com.example.combination.file;
 import com.example.combination.domain.CompareAdapter;
 import com.example.combination.domain.GameInfo;
 import com.example.combination.file.service.CompareAnalyzer;
-import com.example.combination.file.service.EachCompareAnalyzer;
 import com.example.combination.file.service.ExcelFileReader;
-import com.example.combination.file.service.SelfCompareAnalyzer;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
