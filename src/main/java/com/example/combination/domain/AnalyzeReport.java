@@ -1,6 +1,5 @@
 package com.example.combination.domain;
 
-import com.sun.source.tree.Tree;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,28 +9,27 @@ import java.util.*;
 @NoArgsConstructor
 public class AnalyzeReport {
 
-    private Map<Integer, List<IntersectionInfo>> subSetsByElementCount = new HashMap<>();
+    private Map<Integer, List<IntersectionInfo>> intersectionByElementCount = new HashMap<>();
 
     public void add(IntersectionInfo intersectionInfo) {
-
         int size = intersectionInfo.size();
-        if (!subSetsByElementCount.containsKey(size)) {
+        if (!intersectionByElementCount.containsKey(size)) {
             ArrayList<IntersectionInfo> infos = new ArrayList<>();
             infos.add(intersectionInfo);
-            subSetsByElementCount.put(size, infos);
+            intersectionByElementCount.put(size, infos);
         } else {
-            subSetsByElementCount.get(size).add(intersectionInfo);
+            intersectionByElementCount.get(size).add(intersectionInfo);
         }
     }
 
-    public List<IntersectionInfo> getSubSetsByElementCount(int count) {
-        if (!subSetsByElementCount.containsKey(count)) {
+    public List<IntersectionInfo> getIntersectionByElementCount(int count) {
+        if (!intersectionByElementCount.containsKey(count)) {
             return new ArrayList<>();
         }
-        return subSetsByElementCount.get(count);
+        return intersectionByElementCount.get(count);
     }
 
     public TreeSet<Integer> getElementCounts() {
-        return new TreeSet<>(subSetsByElementCount.keySet());
+        return new TreeSet<>(intersectionByElementCount.keySet());
     }
 }

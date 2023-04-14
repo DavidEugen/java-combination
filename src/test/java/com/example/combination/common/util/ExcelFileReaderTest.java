@@ -43,11 +43,10 @@ class ExcelFileReaderTest {
 
         selfCompareAnalyzer.analyze(new CompareAdapter(myList,myList));
         selfCompareAnalyzer.report();
-//        selfCompareAnalyzer.reportByElement(3);
+
 
         eachCompareAnalyzer.analyze(new CompareAdapter(winList,myList));
         eachCompareAnalyzer.report();
-//        eachCompareAnalyzer.reportByElement(4);
 
     }
 }

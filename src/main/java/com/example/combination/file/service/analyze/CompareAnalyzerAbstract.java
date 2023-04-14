@@ -23,7 +23,7 @@ public abstract class CompareAnalyzerAbstract implements CompareAnalyzer{
         List<GameInfo> controlNumberSetGroup = compareAdapter.getControlNumberSetGroup();
         List<GameInfo> experimentalNumberSetGroup = compareAdapter.getExperimentalNumberSetGroup();
 
-        compare(controlNumberSetGroup, experimentalNumberSetGroup);
+        compareEachGroup(controlNumberSetGroup, experimentalNumberSetGroup);
     }
 
     protected Set<Integer> getIntersection(GameInfo controlNumbersInfo, GameInfo experimentalNumberSet) {

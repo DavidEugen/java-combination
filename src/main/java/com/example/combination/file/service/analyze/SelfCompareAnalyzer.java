@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class SelfCompareAnalyzer extends CompareAnalyzerAbstract {
 
-    public void compare(List<GameInfo> controlNumberSetGroup, List<GameInfo> experimentalNumberSetGroup) {
+    public void compareEachGroup(List<GameInfo> controlNumberSetGroup, List<GameInfo> experimentalNumberSetGroup) {
         for (int i = 0; i < controlNumberSetGroup.size(); i++) {
             GameInfo controlNumberSet = controlNumberSetGroup.get(i);
 
@@ -24,7 +24,7 @@ public class SelfCompareAnalyzer extends CompareAnalyzerAbstract {
     }
 
     public void reportByElement(int count) {
-        List<IntersectionInfo> intersections = analyzeReport.getSubSetsByElementCount(count);
+        List<IntersectionInfo> intersections = analyzeReport.getIntersectionByElementCount(count);
 
         log.debug("======[[[SelfCompare]]] \t{}\t TotalCount: \t{}\t======", count, intersections.size());
         for (IntersectionInfo intersectionInfo : intersections) {
