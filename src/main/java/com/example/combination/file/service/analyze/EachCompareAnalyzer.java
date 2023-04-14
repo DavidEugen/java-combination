@@ -1,6 +1,5 @@
 package com.example.combination.file.service.analyze;
 
-import com.example.combination.domain.IntersectionInfo;
 import com.example.combination.domain.GameInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -21,20 +20,4 @@ public class EachCompareAnalyzer extends CompareAnalyzerAbstract {
         }
     }
 
-    public void reportByElement(int count) {
-        List<IntersectionInfo> intersections = analyzeReport.getIntersectionByElementCount(count);
-
-        log.debug("======[[[EachCompare]]] \t{}\t TotalCount: \t{}\t======", count, intersections.size());
-        for (IntersectionInfo intersectionInfo : intersections) {
-            log.debug("[Win{} vs My{}]\t\t{}\t\t{}\t\t{}\t\t\t{}"
-                    , intersectionInfo.getControlNumberSet().getDrawing()
-                    , intersectionInfo.getExperimentalNumberSet().getDrawing()
-                    , intersectionInfo.getIntersection().size()
-                    , intersectionInfo.getIntersection()
-                    , intersectionInfo.getControlNumberSet().getNumbers()
-                    , intersectionInfo.getExperimentalNumberSet().getNumbers()
-            );
-        }
-
-    }
 }

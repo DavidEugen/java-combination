@@ -1,35 +1,51 @@
 package com.example.combination.domain;
 
+import com.example.combination.file.service.analyze.CompareAnalyzer;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-@Data
+
+
+@Slf4j
+@Component
 @NoArgsConstructor
 public class AnalyzeReport {
 
-    private Map<Integer, List<IntersectionInfo>> intersectionByElementCount = new HashMap<>();
+    CompareAnalyzer compareAnalyzer;
 
-    public void add(IntersectionInfo intersectionInfo) {
-        int size = intersectionInfo.size();
-        if (!intersectionByElementCount.containsKey(size)) {
-            ArrayList<IntersectionInfo> infos = new ArrayList<>();
-            infos.add(intersectionInfo);
-            intersectionByElementCount.put(size, infos);
-        } else {
-            intersectionByElementCount.get(size).add(intersectionInfo);
+    public AnalyzeReport(CompareAnalyzer compareAnalyzer) {
+        this.compareAnalyzer = compareAnalyzer;
+    }
+
+    public void report(String analyzerName) {
+        Iterator<Integer> elementsCountGroup = compareAnalyzer.getElementCounts().iterator();
+        while (elementsCountGroup.hasNext()) {
+            Integer elementsCount = elementsCountGroup.next();
+            reportByElement(analyzerName, elementsCount);
         }
     }
 
-    public List<IntersectionInfo> getIntersectionByElementCount(int count) {
-        if (!intersectionByElementCount.containsKey(count)) {
-            return new ArrayList<>();
+    public void reportByElement(String analyzerName, int count) {
+        List<IntersectionInfo> intersections = compareAnalyzer.getIntersectionByElementCount(count);
+
+        log.debug("======[[[{}]]] \t{} Combination\t TotalCount: \t{}\t======", analyzerName, count, intersections.size());
+        for (IntersectionInfo intersectionInfo : intersections) {
+            log.debug("[{} vs {}]\t\t{}\t\t{}\t\t{}\t\t\t{}"
+                    , intersectionInfo.getControlNumberSet().getDrawing()
+                    , intersectionInfo.getExperimentalNumberSet().getDrawing()
+                    , intersectionInfo.getIntersection().size()
+                    , intersectionInfo.getIntersection()
+                    , intersectionInfo.getControlNumberSet().getNumbers()
+                    , intersectionInfo.getExperimentalNumberSet().getNumbers()
+            );
         }
-        return intersectionByElementCount.get(count);
     }
 
-    public TreeSet<Integer> getElementCounts() {
-        return new TreeSet<>(intersectionByElementCount.keySet());
-    }
+
+
+
 }

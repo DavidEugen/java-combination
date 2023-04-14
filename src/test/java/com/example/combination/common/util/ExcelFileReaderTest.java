@@ -1,5 +1,6 @@
 package com.example.combination.common.util;
 
+import com.example.combination.domain.AnalyzeReport;
 import com.example.combination.domain.CompareAdapter;
 import com.example.combination.domain.GameInfo;
 import com.example.combination.file.service.analyze.CompareAnalyzer;
@@ -42,11 +43,13 @@ class ExcelFileReaderTest {
         List<GameInfo> winList = excelFileReader.getSetList(winOnlySheet);
 
         selfCompareAnalyzer.analyze(new CompareAdapter(myList,myList));
-        selfCompareAnalyzer.report();
+        AnalyzeReport analyzeReport = new AnalyzeReport(selfCompareAnalyzer);
+        analyzeReport.report("selfCompareAnalyzer");
 
 
         eachCompareAnalyzer.analyze(new CompareAdapter(winList,myList));
-        eachCompareAnalyzer.report();
+        analyzeReport = new AnalyzeReport(eachCompareAnalyzer);
+        analyzeReport.report("eachCompareAnalyzer");
 
     }
 }
