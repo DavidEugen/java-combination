@@ -4,12 +4,11 @@ import com.example.combination.domain.IntersectionInfo;
 import com.example.combination.domain.AnalyzeReport;
 import com.example.combination.domain.CompareAdapter;
 import com.example.combination.domain.GameInfo;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
+@Slf4j
 public abstract class CompareAnalyzerAbstract implements CompareAnalyzer{
 
     protected AnalyzeReport analyzeReport;
@@ -18,7 +17,7 @@ public abstract class CompareAnalyzerAbstract implements CompareAnalyzer{
         analyzeReport = new AnalyzeReport();
     }
 
-    private static final int MINIMUM_INTERSECTION_COUNT = 4; //유의미한 교집합 원소 개수
+    private static final int MINIMUM_INTERSECTION_COUNT = 3; //유의미한 교집합 원소 개수
 
     public void analyze(CompareAdapter compareAdapter) {
         List<GameInfo> controlNumberSetGroup = compareAdapter.getControlNumberSetGroup();
@@ -41,6 +40,14 @@ public abstract class CompareAnalyzerAbstract implements CompareAnalyzer{
         if (intersection.size() >= MINIMUM_INTERSECTION_COUNT ) {
             intersectionInfo.setIntersection(intersection);
             analyzeReport.add(intersectionInfo);
+        }
+    }
+
+    public void report() {
+        Iterator<Integer> elementsCountGroup = analyzeReport.getElementCounts().iterator();
+        while (elementsCountGroup.hasNext()) {
+            Integer elementsCount = elementsCountGroup.next();
+            reportByElement(elementsCount);
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.combination.common.util;
 import com.example.combination.domain.CompareAdapter;
 import com.example.combination.domain.GameInfo;
 import com.example.combination.file.service.analyze.CompareAnalyzer;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -41,12 +42,12 @@ class ExcelFileReaderTest {
         List<GameInfo> winList = excelFileReader.getSetList(winOnlySheet);
 
         selfCompareAnalyzer.analyze(new CompareAdapter(myList,myList));
-//        selfCompareAnalyzer.report();
-        selfCompareAnalyzer.reportByElement(2);
+        selfCompareAnalyzer.report();
+//        selfCompareAnalyzer.reportByElement(3);
 
         eachCompareAnalyzer.analyze(new CompareAdapter(winList,myList));
-//        eachCompareAnalyzer.report();
-        eachCompareAnalyzer.reportByElement(4);
+        eachCompareAnalyzer.report();
+//        eachCompareAnalyzer.reportByElement(4);
 
     }
 }

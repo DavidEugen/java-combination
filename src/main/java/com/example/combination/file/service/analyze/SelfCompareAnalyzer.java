@@ -1,7 +1,7 @@
 package com.example.combination.file.service.analyze;
 
-import com.example.combination.domain.IntersectionInfo;
 import com.example.combination.domain.GameInfo;
+import com.example.combination.domain.IntersectionInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -10,8 +10,6 @@ import java.util.List;
 @Slf4j
 @Component
 public class SelfCompareAnalyzer extends CompareAnalyzerAbstract {
-
-    private static final int MINIMUM_INTERSECTION_COUNT = 3;
 
     public void compare(List<GameInfo> controlNumberSetGroup, List<GameInfo> experimentalNumberSetGroup) {
         for (int i = 0; i < controlNumberSetGroup.size(); i++) {
@@ -25,26 +23,10 @@ public class SelfCompareAnalyzer extends CompareAnalyzerAbstract {
         }
     }
 
-    public void report() {
-        List<IntersectionInfo> intersections = analyzeReport.getIntersectionCases();
-
-        log.debug("======\t{}\t///SelfCompare///TotalCount======", intersections.size());
-        for (IntersectionInfo intersectionInfo : intersections) {
-            log.debug("[{} vs {}]\t\t{}\t\t{}\t\t{}\t\t\t{}"
-                    , intersectionInfo.getControlNumberSet().getDrawing()
-                    , intersectionInfo.getExperimentalNumberSet().getDrawing()
-                    , intersectionInfo.getIntersection().size()
-                    , intersectionInfo.getIntersection()
-                    , intersectionInfo.getControlNumberSet().getNumbers()
-                    , intersectionInfo.getExperimentalNumberSet().getNumbers()
-            );
-        }
-    }
-
     public void reportByElement(int count) {
         List<IntersectionInfo> intersections = analyzeReport.getSubSetsByElementCount(count);
 
-        log.debug("======\t{}\t///SelfCompare///TotalCount======", intersections.size());
+        log.debug("======[[[SelfCompare]]] \t{}\t TotalCount: \t{}\t======", count, intersections.size());
         for (IntersectionInfo intersectionInfo : intersections) {
             log.debug("[{} vs {}]\t\t{}\t\t{}\t\t{}\t\t\t{}"
                     , intersectionInfo.getControlNumberSet().getDrawing()

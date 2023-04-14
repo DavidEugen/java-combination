@@ -11,8 +11,6 @@ import java.util.List;
 @Component
 public class EachCompareAnalyzer extends CompareAnalyzerAbstract {
 
-    private static final int MINIMUM_INTERSECTION_COUNT = 4;
-
     public void compare(List<GameInfo> controlNumberSetGroup, List<GameInfo> experimentalNumberSetGroup) {
         for (GameInfo controlNumberSet : controlNumberSetGroup) {
 
@@ -23,26 +21,10 @@ public class EachCompareAnalyzer extends CompareAnalyzerAbstract {
         }
     }
 
-    public void report() {
-        List<IntersectionInfo> intersections = analyzeReport.getIntersectionCases();
-
-        log.debug("======\t{}\t///EachCompare///TotalCount======", intersections.size());
-        for (IntersectionInfo intersectionInfo : intersections) {
-            log.debug("[Win{} vs My{}]\t\t{}\t\t{}\t\t{}\t\t\t{}"
-                    , intersectionInfo.getControlNumberSet().getDrawing()
-                    , intersectionInfo.getExperimentalNumberSet().getDrawing()
-                    , intersectionInfo.getIntersection().size()
-                    , intersectionInfo.getIntersection()
-                    , intersectionInfo.getControlNumberSet().getNumbers()
-                    , intersectionInfo.getExperimentalNumberSet().getNumbers()
-            );
-        }
-    }
-
     public void reportByElement(int count) {
         List<IntersectionInfo> intersections = analyzeReport.getSubSetsByElementCount(count);
 
-        log.debug("======\t{}\t///EachCompare///TotalCount======", intersections.size());
+        log.debug("======[[[EachCompare]]] \t{}\t TotalCount: \t{}\t======", count, intersections.size());
         for (IntersectionInfo intersectionInfo : intersections) {
             log.debug("[Win{} vs My{}]\t\t{}\t\t{}\t\t{}\t\t\t{}"
                     , intersectionInfo.getControlNumberSet().getDrawing()

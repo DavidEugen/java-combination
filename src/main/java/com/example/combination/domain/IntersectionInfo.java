@@ -1,8 +1,6 @@
 package com.example.combination.domain;
 
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;

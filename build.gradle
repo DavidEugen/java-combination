@@ -29,9 +29,8 @@ dependencies {
 	implementation 'org.apache.poi:poi:5.2.3'                // .xls 확장자
 	implementation 'org.apache.poi:poi-ooxml:5.2.3'			 // .xlsx 확장자
     testImplementation 'junit:junit:4.13.1'
-	testImplementation 'junit:junit:4.13.1'
 
-	compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
