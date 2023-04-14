@@ -43,7 +43,7 @@ public class ExcelFileReader {
             for (int j = 1; j < 7; j++) {
                 gameInfo.add((int) row.getCell(j).getNumericCellValue());
             }
-            log.debug("{} : {}",(int) row.getCell(0).getNumericCellValue(), gameInfo.getNumbers());
+            log.trace("{} : {}",(int) row.getCell(0).getNumericCellValue(), gameInfo.getNumbers());
 
             setList.add(gameInfo);
         }

@@ -2,7 +2,7 @@ package com.example.combination.file;
 
 import com.example.combination.domain.CompareAdapter;
 import com.example.combination.domain.GameInfo;
-import com.example.combination.file.service.CompareAnalyzer;
+import com.example.combination.file.service.analyze.CompareAnalyzer;
 import com.example.combination.file.service.ExcelFileReader;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -34,11 +34,9 @@ class ReadExcelFileTest {
         List<GameInfo> winList = excelFileReader.getSetList("winOnly");
         List<GameInfo> myList = excelFileReader.getSetList("MYEDIT");
 
-//        CompareAnalyzer selfCompareAnalyzer = new SelfCompareAnalyzer();
         selfCompareAnalyzer.compare(new CompareAdapter(myList,myList));
         selfCompareAnalyzer.analyze();
 
-//        CompareAnalyzer eachCompareAnalyzer = new EachCompareAnalyzer();
         eachCompareAnalyzer.compare(new CompareAdapter(winList,myList));
         eachCompareAnalyzer.analyze();
 
