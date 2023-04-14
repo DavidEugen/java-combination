@@ -6,13 +6,16 @@ import java.util.Set;
 
 @Data
 public class AnalyzeInfo {
-    private GameInfo controlNumbersInfo;
-    private GameInfo comparingNumbersInfo;
-    private int maxDuplicateCount;
-    private Set<Integer> intersectionSet;
+    //대조군
+    private GameInfo controlNumberSet;
+    //실험군
+    private GameInfo experimentalNumberSet;
 
-    public AnalyzeInfo(GameInfo controlNumbersInfo, GameInfo comparingNumbersInfo) {
-        this.controlNumbersInfo = controlNumbersInfo;
-        this.comparingNumbersInfo = comparingNumbersInfo;
+    //교집합
+    private Set<Integer> intersection;
+
+    public AnalyzeInfo(GameInfo controlNumberSet, GameInfo experimentalNumberSet) {
+        this.controlNumberSet = controlNumberSet;
+        this.experimentalNumberSet = experimentalNumberSet;
     }
 }

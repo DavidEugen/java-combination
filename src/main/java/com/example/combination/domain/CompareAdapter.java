@@ -6,11 +6,11 @@ import java.util.List;
 
 @Data
 public class CompareAdapter {
-    List<GameInfo> controlSetList;
-    List<GameInfo> compareSetList;
+    List<GameInfo> controlNumberSetGroup;
+    List<GameInfo> experimentalNumberSetGroup;
 
-    public CompareAdapter(List<GameInfo> controlSetList, List<GameInfo> compareSetList) {
-        this.controlSetList = controlSetList;
-        this.compareSetList = compareSetList;
+    public CompareAdapter(List<GameInfo> controlNumberSetGroup, List<GameInfo> experimentalNumberSetGroup) {
+        this.controlNumberSetGroup = controlNumberSetGroup;
+        this.experimentalNumberSetGroup = experimentalNumberSetGroup;
     }
 }

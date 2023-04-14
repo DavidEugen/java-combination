@@ -34,11 +34,11 @@ class ReadExcelFileTest {
         List<GameInfo> winList = excelFileReader.getSetList("winOnly");
         List<GameInfo> myList = excelFileReader.getSetList("MYEDIT");
 
-        selfCompareAnalyzer.compare(new CompareAdapter(myList,myList));
-        selfCompareAnalyzer.analyze();
+        selfCompareAnalyzer.analyze(new CompareAdapter(myList,myList));
+        selfCompareAnalyzer.report();
 
-        eachCompareAnalyzer.compare(new CompareAdapter(winList,myList));
-        eachCompareAnalyzer.analyze();
+        eachCompareAnalyzer.analyze(new CompareAdapter(winList,myList));
+        eachCompareAnalyzer.report();
 
 
     }
