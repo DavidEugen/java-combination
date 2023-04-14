@@ -1,4 +1,4 @@
-package com.example.combination.file.service;
+package com.example.combination.common.util;
 
 import java.io.*;
 

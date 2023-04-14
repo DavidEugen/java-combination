@@ -5,6 +5,7 @@ import com.example.combination.domain.AnalyzeReport;
 import com.example.combination.domain.CompareAdapter;
 import com.example.combination.domain.GameInfo;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -28,13 +29,13 @@ public abstract class CompareAnalyzerAbstract implements CompareAnalyzer{
 
     protected Set<Integer> getIntersection(GameInfo controlNumbersInfo, GameInfo experimentalNumberSet) {
         //교집합 비교 실행
-        Set<Integer> intersection = new TreeSet<>(experimentalNumberSet.getNumbers());
+        Set<Integer> intersection = new HashSet<>(experimentalNumberSet.getNumbers());
         intersection.retainAll(controlNumbersInfo.getNumbers());
 
         return intersection;
     }
 
-    protected void compareEachNumberSets(GameInfo controlNumberSet, GameInfo experimentalNumberSet, int compareMinimumCount) {
+    protected void compareEachNumberSets(GameInfo controlNumberSet, GameInfo experimentalNumberSet) {
         IntersectionInfo intersectionInfo = new IntersectionInfo(controlNumberSet, experimentalNumberSet);
         Set<Integer> intersection = getIntersection(controlNumberSet, experimentalNumberSet);
         if (intersection.size() >= MINIMUM_INTERSECTION_COUNT ) {
@@ -42,9 +43,4 @@ public abstract class CompareAnalyzerAbstract implements CompareAnalyzer{
             analyzeReport.add(intersectionInfo);
         }
     }
-
-    public void getSubSet() {
-        analyzeReport.getSubSet();
-    }
-
 }

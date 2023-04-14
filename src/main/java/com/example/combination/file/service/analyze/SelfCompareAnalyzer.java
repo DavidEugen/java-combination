@@ -20,13 +20,29 @@ public class SelfCompareAnalyzer extends CompareAnalyzerAbstract {
             for (int j = i + 1; j < experimentalNumberSetGroup.size(); j++) {
                 GameInfo experimentalNumberSet = experimentalNumberSetGroup.get(j);
 
-                compareEachNumberSets(controlNumberSet, experimentalNumberSet, MINIMUM_INTERSECTION_COUNT);
+                compareEachNumberSets(controlNumberSet, experimentalNumberSet);
             }
         }
     }
 
     public void report() {
-        List<IntersectionInfo> intersections = analyzeReport.getIntersections();
+        List<IntersectionInfo> intersections = analyzeReport.getIntersectionCases();
+
+        log.debug("======\t{}\t///SelfCompare///TotalCount======", intersections.size());
+        for (IntersectionInfo intersectionInfo : intersections) {
+            log.debug("[{} vs {}]\t\t{}\t\t{}\t\t{}\t\t\t{}"
+                    , intersectionInfo.getControlNumberSet().getDrawing()
+                    , intersectionInfo.getExperimentalNumberSet().getDrawing()
+                    , intersectionInfo.getIntersection().size()
+                    , intersectionInfo.getIntersection()
+                    , intersectionInfo.getControlNumberSet().getNumbers()
+                    , intersectionInfo.getExperimentalNumberSet().getNumbers()
+            );
+        }
+    }
+
+    public void reportByElement(int count) {
+        List<IntersectionInfo> intersections = analyzeReport.getSubSetsByElementCount(count);
 
         log.debug("======\t{}\t///SelfCompare///TotalCount======", intersections.size());
         for (IntersectionInfo intersectionInfo : intersections) {

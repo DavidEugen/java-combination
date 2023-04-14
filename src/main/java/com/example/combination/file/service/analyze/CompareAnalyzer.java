@@ -11,4 +11,6 @@ public interface CompareAnalyzer {
     void report();
 
     void compare(List<GameInfo> controlNumberSetGroup, List<GameInfo> experimentalNumberSetGroup);
+
+    void reportByElement(int count);
 }
