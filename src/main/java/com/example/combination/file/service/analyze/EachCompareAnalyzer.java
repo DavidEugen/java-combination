@@ -1,6 +1,6 @@
 package com.example.combination.file.service.analyze;
 
-import com.example.combination.domain.AnalyzeInfo;
+import com.example.combination.domain.IntersectionInfo;
 import com.example.combination.domain.GameInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -24,15 +24,17 @@ public class EachCompareAnalyzer extends CompareAnalyzerAbstract {
     }
 
     public void report() {
-        log.debug("======\t{}\t///EachCompare///TotalCount======", results.size());
-        for (AnalyzeInfo analyzeInfo : results) {
+        List<IntersectionInfo> intersections = analyzeReport.getIntersections();
+
+        log.debug("======\t{}\t///EachCompare///TotalCount======", intersections.size());
+        for (IntersectionInfo intersectionInfo : intersections) {
             log.debug("[Win{} vs My{}]\t\t{}\t\t{}\t\t{}\t\t\t{}"
-                    , analyzeInfo.getControlNumberSet().getDrawing()
-                    , analyzeInfo.getExperimentalNumberSet().getDrawing()
-                    , analyzeInfo.getIntersection().size()
-                    , analyzeInfo.getIntersection()
-                    , analyzeInfo.getControlNumberSet().getNumbers()
-                    , analyzeInfo.getExperimentalNumberSet().getNumbers()
+                    , intersectionInfo.getControlNumberSet().getDrawing()
+                    , intersectionInfo.getExperimentalNumberSet().getDrawing()
+                    , intersectionInfo.getIntersection().size()
+                    , intersectionInfo.getIntersection()
+                    , intersectionInfo.getControlNumberSet().getNumbers()
+                    , intersectionInfo.getExperimentalNumberSet().getNumbers()
             );
         }
     }

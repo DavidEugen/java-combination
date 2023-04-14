@@ -1,17 +1,24 @@
 package com.example.combination.file.service.analyze;
 
-import com.example.combination.domain.AnalyzeInfo;
+import com.example.combination.domain.IntersectionInfo;
+import com.example.combination.domain.AnalyzeReport;
 import com.example.combination.domain.CompareAdapter;
 import com.example.combination.domain.GameInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 public abstract class CompareAnalyzerAbstract implements CompareAnalyzer{
 
-    protected List<AnalyzeInfo> results = new ArrayList<>();
+    protected AnalyzeReport analyzeReport;
+
+    public CompareAnalyzerAbstract() {
+        analyzeReport = new AnalyzeReport();
+    }
+
+    private static final int MINIMUM_INTERSECTION_COUNT = 4; //유의미한 교집합 원소 개수
+
     public void analyze(CompareAdapter compareAdapter) {
         List<GameInfo> controlNumberSetGroup = compareAdapter.getControlNumberSetGroup();
         List<GameInfo> experimentalNumberSetGroup = compareAdapter.getExperimentalNumberSetGroup();
@@ -19,21 +26,25 @@ public abstract class CompareAnalyzerAbstract implements CompareAnalyzer{
         compare(controlNumberSetGroup, experimentalNumberSetGroup);
     }
 
-    protected Set<Integer> getIntersection(GameInfo controlNumbersInfo, GameInfo comparingNumbersInfo) {
+    protected Set<Integer> getIntersection(GameInfo controlNumbersInfo, GameInfo experimentalNumberSet) {
         //교집합 비교 실행
-        Set<Integer> comparedNumbers = new TreeSet<>(comparingNumbersInfo.getNumbers());
-        comparedNumbers.retainAll(controlNumbersInfo.getNumbers());
+        Set<Integer> intersection = new TreeSet<>(experimentalNumberSet.getNumbers());
+        intersection.retainAll(controlNumbersInfo.getNumbers());
 
-        return comparedNumbers;
+        return intersection;
     }
 
     protected void compareEachNumberSets(GameInfo controlNumberSet, GameInfo experimentalNumberSet, int compareMinimumCount) {
-        AnalyzeInfo analyzeInfo = new AnalyzeInfo(controlNumberSet, experimentalNumberSet);
+        IntersectionInfo intersectionInfo = new IntersectionInfo(controlNumberSet, experimentalNumberSet);
         Set<Integer> intersection = getIntersection(controlNumberSet, experimentalNumberSet);
-        if (intersection.size() >= compareMinimumCount ) {
-            analyzeInfo.setIntersection(intersection);
-            results.add(analyzeInfo);
+        if (intersection.size() >= MINIMUM_INTERSECTION_COUNT ) {
+            intersectionInfo.setIntersection(intersection);
+            analyzeReport.add(intersectionInfo);
         }
+    }
+
+    public void getSubSet() {
+        analyzeReport.getSubSet();
     }
 
 }

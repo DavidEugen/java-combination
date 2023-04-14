@@ -1,18 +1,17 @@
 package com.example.combination.file.service.analyze;
 
-import com.example.combination.domain.AnalyzeInfo;
+import com.example.combination.domain.IntersectionInfo;
 import com.example.combination.domain.GameInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Set;
 
 @Slf4j
 @Component
 public class SelfCompareAnalyzer extends CompareAnalyzerAbstract {
 
-    private static final int MINIMUM_INTERSECTION_COUNT = 2;
+    private static final int MINIMUM_INTERSECTION_COUNT = 3;
 
     public void compare(List<GameInfo> controlNumberSetGroup, List<GameInfo> experimentalNumberSetGroup) {
         for (int i = 0; i < controlNumberSetGroup.size(); i++) {
@@ -27,15 +26,17 @@ public class SelfCompareAnalyzer extends CompareAnalyzerAbstract {
     }
 
     public void report() {
-        log.debug("======\t{}\t///SelfCompare///TotalCount======", results.size());
-        for (AnalyzeInfo analyzeInfo : results) {
+        List<IntersectionInfo> intersections = analyzeReport.getIntersections();
+
+        log.debug("======\t{}\t///SelfCompare///TotalCount======", intersections.size());
+        for (IntersectionInfo intersectionInfo : intersections) {
             log.debug("[{} vs {}]\t\t{}\t\t{}\t\t{}\t\t\t{}"
-                    , analyzeInfo.getControlNumberSet().getDrawing()
-                    , analyzeInfo.getExperimentalNumberSet().getDrawing()
-                    , analyzeInfo.getIntersection().size()
-                    , analyzeInfo.getIntersection()
-                    , analyzeInfo.getControlNumberSet().getNumbers()
-                    , analyzeInfo.getExperimentalNumberSet().getNumbers()
+                    , intersectionInfo.getControlNumberSet().getDrawing()
+                    , intersectionInfo.getExperimentalNumberSet().getDrawing()
+                    , intersectionInfo.getIntersection().size()
+                    , intersectionInfo.getIntersection()
+                    , intersectionInfo.getControlNumberSet().getNumbers()
+                    , intersectionInfo.getExperimentalNumberSet().getNumbers()
             );
         }
     }

@@ -5,7 +5,8 @@ import lombok.Data;
 import java.util.Set;
 
 @Data
-public class AnalyzeInfo {
+public class IntersectionInfo {
+
     //대조군
     private GameInfo controlNumberSet;
     //실험군
@@ -14,7 +15,7 @@ public class AnalyzeInfo {
     //교집합
     private Set<Integer> intersection;
 
-    public AnalyzeInfo(GameInfo controlNumberSet, GameInfo experimentalNumberSet) {
+    public IntersectionInfo(GameInfo controlNumberSet, GameInfo experimentalNumberSet) {
         this.controlNumberSet = controlNumberSet;
         this.experimentalNumberSet = experimentalNumberSet;
     }
