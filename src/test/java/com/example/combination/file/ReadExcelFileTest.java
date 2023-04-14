@@ -40,6 +40,5 @@ class ReadExcelFileTest {
         eachCompareAnalyzer.analyze(new CompareAdapter(winList,myList));
         eachCompareAnalyzer.report();
 
-
     }
 }
