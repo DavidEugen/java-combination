@@ -12,7 +12,7 @@ public abstract class CompareAnalyzerAbstract implements CompareAnalyzer{
 
     private static final int MINIMUM_INTERSECTION_COUNT = 2; //유의미한 교집합 원소 개수
 
-    protected Map<Integer, List<IntersectionInfo>> intersectionByElementCount = new HashMap<>();
+    protected Map<Integer, List<IntersectionInfo>> intersectionStatistics = new HashMap<>();
 
     public void analyze(CompareAdapter compareAdapter) {
         List<GameInfo> controlNumberSetGroup = compareAdapter.getControlNumberSetGroup();
@@ -40,26 +40,26 @@ public abstract class CompareAnalyzerAbstract implements CompareAnalyzer{
 
     protected void add(IntersectionInfo intersectionInfo) {
         int size = intersectionInfo.size();
-        if (!intersectionByElementCount.containsKey(size)) {
+        if (!intersectionStatistics.containsKey(size)) {
             ArrayList<IntersectionInfo> infos = new ArrayList<>();
             infos.add(intersectionInfo);
-            intersectionByElementCount.put(size, infos);
+            intersectionStatistics.put(size, infos);
         } else {
-            intersectionByElementCount.get(size).add(intersectionInfo);
+            intersectionStatistics.get(size).add(intersectionInfo);
         }
     }
 
     public List<IntersectionInfo> getIntersectionByElementCount(int count) {
         // 해당 메소드 개별로 호출시 validation,
         // MINIMUM_INTERSECTION_COUNT 에 따라 없는 경우도 있음
-        if (!intersectionByElementCount.containsKey(count)) {
+        if (!intersectionStatistics.containsKey(count)) {
             return new ArrayList<>();
         }
-        return intersectionByElementCount.get(count);
+        return intersectionStatistics.get(count);
     }
 
     public TreeSet<Integer> getElementCounts() {
-        return new TreeSet<>(intersectionByElementCount.keySet());
+        return new TreeSet<>(intersectionStatistics.keySet());
     }
 
 

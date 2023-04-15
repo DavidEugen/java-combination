@@ -33,15 +33,17 @@ public class AnalyzeReport {
         List<IntersectionInfo> intersections = compareAnalyzer.getIntersectionByElementCount(count);
 
         log.debug("======[[[{}]]] \t{} Combination\t TotalCount: \t{}\t======", analyzerName, count, intersections.size());
-        for (IntersectionInfo intersectionInfo : intersections) {
-            log.debug("[{} vs {}]\t\t{}\t\t{}\t\t{}\t\t\t{}"
-                    , intersectionInfo.getControlNumberSet().getDrawing()
-                    , intersectionInfo.getExperimentalNumberSet().getDrawing()
-                    , intersectionInfo.getIntersection().size()
-                    , intersectionInfo.getIntersection()
-                    , intersectionInfo.getControlNumberSet().getNumbers()
-                    , intersectionInfo.getExperimentalNumberSet().getNumbers()
-            );
+        if (count > 3) { //2개일때 너무 많음
+            for (IntersectionInfo intersectionInfo : intersections) {
+                log.debug("[{} vs {}]\t\t{}\t\t{}\t\t{}\t\t\t{}"
+                        , intersectionInfo.getControlNumberSet().getDrawing()
+                        , intersectionInfo.getExperimentalNumberSet().getDrawing()
+                        , intersectionInfo.getIntersection().size()
+                        , intersectionInfo.getIntersection()
+                        , intersectionInfo.getControlNumberSet().getNumbers()
+                        , intersectionInfo.getExperimentalNumberSet().getNumbers()
+                );
+            }
         }
     }
 

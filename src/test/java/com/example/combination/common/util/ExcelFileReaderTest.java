@@ -3,8 +3,9 @@ package com.example.combination.common.util;
 import com.example.combination.domain.AnalyzeReport;
 import com.example.combination.domain.CompareAdapter;
 import com.example.combination.domain.GameInfo;
+import com.example.combination.domain.SelfSubSetInfos;
 import com.example.combination.file.service.analyze.CompareAnalyzer;
-import lombok.extern.slf4j.Slf4j;
+import com.example.combination.file.service.analyze.SelfCompareAnalyzer;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -45,11 +44,13 @@ class ExcelFileReaderTest {
         selfCompareAnalyzer.analyze(new CompareAdapter(myList,myList));
         AnalyzeReport analyzeReport = new AnalyzeReport(selfCompareAnalyzer);
         analyzeReport.report("selfCompareAnalyzer");
+        SelfSubSetInfos selfSubSetInfos = new SelfSubSetInfos((SelfCompareAnalyzer) selfCompareAnalyzer);
+        selfSubSetInfos.getDuplicateSetCount();
+        selfSubSetInfos.reportStatics();
 
-
-        eachCompareAnalyzer.analyze(new CompareAdapter(winList,myList));
-        analyzeReport = new AnalyzeReport(eachCompareAnalyzer);
-        analyzeReport.report("eachCompareAnalyzer");
+//        eachCompareAnalyzer.analyze(new CompareAdapter(winList,myList));
+//        analyzeReport = new AnalyzeReport(eachCompareAnalyzer);
+//        analyzeReport.report("eachCompareAnalyzer");
 
     }
 }
