@@ -34,7 +34,6 @@ class SelfCompareAnalyzerTest {
         mapSets.put(set1, "First");
         mapSets.put(set3, "Third");
 
-
         //then
         log.debug("{}",mapSets);
     }
