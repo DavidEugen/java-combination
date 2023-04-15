@@ -1,6 +1,5 @@
 package com.example.combination.domain;
 
-import com.example.combination.file.service.analyze.CompareAnalyzer;
 import com.example.combination.file.service.analyze.SelfCompareAnalyzer;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,7 +8,7 @@ import java.util.*;
 @Slf4j
 public class SelfSubSetInfos {
 
-    protected Map<Integer, Map<Set<Integer>, Integer>> subSets = new HashMap<>();
+    protected Map<Integer, Map<Set<Integer>, Integer>> allSubSets = new HashMap<>();
 
     SelfCompareAnalyzer selfCompareAnalyzer;
 
@@ -39,12 +38,12 @@ public class SelfSubSetInfos {
 
         Map<Set<Integer>, Integer> singleSubset;
 
-        if (!subSets.containsKey(elementCount)) {
+        if (!allSubSets.containsKey(elementCount)) {
             singleSubset = new HashMap<>();
             singleSubset.put(intersection, 1);
 
         } else {
-            singleSubset = subSets.get(elementCount);
+            singleSubset = allSubSets.get(elementCount);
             if (!singleSubset.containsKey(intersection)) {
                 singleSubset.put(intersection, 1);
             } else {
@@ -53,25 +52,36 @@ public class SelfSubSetInfos {
 
         }
 
-        subSets.put(elementCount, singleSubset);
+        allSubSets.put(elementCount, singleSubset);
     }
 
     public void reportStatics() {
-        Set<Integer> elementCounts = subSets.keySet();
+        Set<Integer> elementCounts = allSubSets.keySet();
 
-        for (int elementCount :elementCounts) {
+        for (int elementCount : elementCounts) {
             int totalCount = 0;
-            log.debug("ElementCount : {}",elementCount);
-            Map<Set<Integer>, Integer> setIntegerMap = subSets.get(elementCount);
-            Set<Set<Integer>> subset = setIntegerMap.keySet();
-            for (Set<Integer> subsetNumbers :subset) {
-                Integer singleSubsetCount = setIntegerMap.get(subsetNumbers);
-                log.debug("{} : {}", subsetNumbers, singleSubsetCount);
-                totalCount += singleSubsetCount;
-            }
-            log.debug("ElementCount : {}, total count : {}",elementCount,totalCount);
-        }
+            log.debug("ElementCount : {}", elementCount);
+            Map<Set<Integer>, Integer> sameElementCountGroup = allSubSets.get(elementCount);
 
+            Comparator<Map.Entry<Set<Integer>, Integer>> comparator = new Comparator<>() {
+                @Override
+                public int compare(Map.Entry<Set<Integer>, Integer> o1, Map.Entry<Set<Integer>, Integer> o2) {
+                    return o2.getValue().compareTo(o1.getValue());
+                }
+            };
+
+            ArrayList<Map.Entry<Set<Integer>, Integer>> list = new ArrayList<>(sameElementCountGroup.entrySet());
+            Collections.sort(list, comparator);
+
+
+            for (Map.Entry<Set<Integer>, Integer> subset : list) {
+                Integer duplicateCount = subset.getValue();
+                log.debug("{} : {}", subset.getKey(), duplicateCount);
+                totalCount += duplicateCount;
+            }
+            log.debug("ElementCount : {}, total count : {}", elementCount, totalCount);
+        }
     }
+
 
 }

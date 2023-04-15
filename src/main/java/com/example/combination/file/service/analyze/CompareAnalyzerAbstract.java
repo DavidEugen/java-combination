@@ -32,7 +32,7 @@ public abstract class CompareAnalyzerAbstract implements CompareAnalyzer{
 
     protected Set<Integer> getIntersection(GameInfo controlNumbersInfo, GameInfo experimentalNumberSet) {
         //교집합 비교 실행
-        Set<Integer> intersection = new HashSet<>(experimentalNumberSet.getNumbers());
+        Set<Integer> intersection = new TreeSet<>(experimentalNumberSet.getNumbers());
         intersection.retainAll(controlNumbersInfo.getNumbers());
 
         return intersection;

@@ -41,7 +41,7 @@ class ExcelFileReaderTest {
         List<GameInfo> myList = excelFileReader.getSetList(myEditSheet);
         List<GameInfo> winList = excelFileReader.getSetList(winOnlySheet);
 
-        selfCompareAnalyzer.analyze(new CompareAdapter(myList,myList));
+        selfCompareAnalyzer.analyze(new CompareAdapter(myList, myList));
         AnalyzeReport analyzeReport = new AnalyzeReport(selfCompareAnalyzer);
         analyzeReport.report("selfCompareAnalyzer");
         SelfSubSetInfos selfSubSetInfos = new SelfSubSetInfos((SelfCompareAnalyzer) selfCompareAnalyzer);
