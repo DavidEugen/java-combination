@@ -49,7 +49,6 @@ public class SelfSubSetInfos {
             } else {
                 singleSubset.put(intersection, singleSubset.get(intersection) + 1);
             }
-
         }
 
         allSubSets.put(elementCount, singleSubset);
@@ -70,11 +69,10 @@ public class SelfSubSetInfos {
                 }
             };
 
-            ArrayList<Map.Entry<Set<Integer>, Integer>> list = new ArrayList<>(sameElementCountGroup.entrySet());
-            Collections.sort(list, comparator);
+            ArrayList<Map.Entry<Set<Integer>, Integer>> sortedList = new ArrayList<>(sameElementCountGroup.entrySet());
+            Collections.sort(sortedList, comparator);
 
-
-            for (Map.Entry<Set<Integer>, Integer> subset : list) {
+            for (Map.Entry<Set<Integer>, Integer> subset : sortedList) {
                 Integer duplicateCount = subset.getValue();
                 log.debug("{} : {}", subset.getKey(), duplicateCount);
                 totalCount += duplicateCount;
