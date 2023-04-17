@@ -57,28 +57,42 @@ public class SelfSubSetInfos {
     public void reportStatics() {
         Set<Integer> elementCounts = allSubSets.keySet();
 
+        reposrtAllGroupSubset(elementCounts);
+    }
+
+    private void reposrtAllGroupSubset(Set<Integer> elementCounts) {
         for (int elementCount : elementCounts) {
             int totalCount = 0;
             log.debug("ElementCount : {}", elementCount);
+
             Map<Set<Integer>, Integer> sameElementCountGroup = allSubSets.get(elementCount);
 
-            Comparator<Map.Entry<Set<Integer>, Integer>> comparator = new Comparator<>() {
-                @Override
-                public int compare(Map.Entry<Set<Integer>, Integer> o1, Map.Entry<Set<Integer>, Integer> o2) {
-                    return o2.getValue().compareTo(o1.getValue());
-                }
-            };
+            ArrayList<Map.Entry<Set<Integer>, Integer>> sortedList = getSortedList(sameElementCountGroup);
 
-            ArrayList<Map.Entry<Set<Integer>, Integer>> sortedList = new ArrayList<>(sameElementCountGroup.entrySet());
-            Collections.sort(sortedList, comparator);
-
-            for (Map.Entry<Set<Integer>, Integer> subset : sortedList) {
-                Integer duplicateCount = subset.getValue();
-                log.debug("{} : {}", subset.getKey(), duplicateCount);
-                totalCount += duplicateCount;
-            }
-            log.debug("ElementCount : {}, total count : {}", elementCount, totalCount);
+            reportSingleSubset(elementCount, totalCount, sortedList);
         }
+    }
+
+    private static void reportSingleSubset(int elementCount, int totalCount, ArrayList<Map.Entry<Set<Integer>, Integer>> sortedList) {
+        for (Map.Entry<Set<Integer>, Integer> subset : sortedList) {
+            Integer duplicateCount = subset.getValue();
+            log.debug("{} : {}", subset.getKey(), duplicateCount);
+            totalCount += duplicateCount;
+        }
+        log.debug("ElementCount : {}, total count : {}", elementCount, totalCount);
+    }
+
+    private static ArrayList<Map.Entry<Set<Integer>, Integer>> getSortedList(Map<Set<Integer>, Integer> sameElementCountGroup) {
+        Comparator<Map.Entry<Set<Integer>, Integer>> comparator = new Comparator<>() {
+            @Override
+            public int compare(Map.Entry<Set<Integer>, Integer> o1, Map.Entry<Set<Integer>, Integer> o2) {
+                return o2.getValue().compareTo(o1.getValue());
+            }
+        };
+
+        ArrayList<Map.Entry<Set<Integer>, Integer>> sortedList = new ArrayList<>(sameElementCountGroup.entrySet());
+        Collections.sort(sortedList, comparator);
+        return sortedList;
     }
 
 
